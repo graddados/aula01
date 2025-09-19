@@ -82,7 +82,7 @@ country_data <- coronavirus %>%
   mutate(
     days_elapsed = as.numeric(date - min(date)),
     end_date     = if_else(date == max(date), TRUE, FALSE),
-    end_label    = if_else(end_date, country, NULL)
+    end_label    = if_else(end_date, country, "")
   ) %>%
   # ungroup
   ungroup()
@@ -117,7 +117,7 @@ ggplot(data = country_data,
   # add country labels, nudged above the lines
   geom_label_repel(nudge_y = 1, direction = "y", hjust = 1) + 
   # turn off legend
-  guides(color = FALSE) +
+  #guides(color = TRUE) +
   # use pretty colors
   scale_color_viridis_d() +
   # better formatting for y-axis
@@ -129,7 +129,7 @@ ggplot(data = country_data,
     x = "Dias desde a confirmação da 10a morte",
     y = "Quantidade de mortes acumuladas",
     title = "Mortes por COVID-19, países selecionados",
-    subtitle = glue("Data inicial", as_of_date_formatted, .sep = " "),
+    #subtitle = glue("Data inicial", as_of_date_formatted, .sep = " "),
     caption = "Source: github.com/RamiKrispin/coronavirus"
   )
 ```
